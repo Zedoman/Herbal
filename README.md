@@ -192,12 +192,6 @@ LIMIT 20;
 
 ---
 
-## 🪙 License
-
-MIT — use, fork, contribute, or remix for your own ancient-medical-GPT dreams.
-
----
-
 ## 🧝‍♂️ Final Words
 
 If your grandma's herbal wisdom deserves a SQL interface and AI integration...

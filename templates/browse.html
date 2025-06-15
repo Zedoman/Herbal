@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Herbal Remedies - Herbal Remedy Advisor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body class="app">
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">Herbal Remedy Advisor</h1>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/" class="nav-link">Search</a></li>
+                <li class="nav-item"><a href="/browse" class="nav-link active">Browse All</a></li>
+                <li class="nav-item"><a href="/add" class="nav-link">Add Remedy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>All Herbal Remedies</h1>
+                <p>Browse our complete collection of herbal remedies</p>
+            </div>
+            
+            <div class="main-content">
+                {% if results is not none and not results.empty %}
+                    <div class="results-section">
+                        <div class="browse-grid">
+                            {% for remedy in results %}
+                                <div class="remedy-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">{{ remedy.symptom|title if remedy.symptom else 'General' }}</h3>
+<span class="card-category">{{ remedy.safety|replace('_', ' ')|title }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-description">{{ remedy.content }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="no-results">No remedies in the database yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

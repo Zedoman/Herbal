@@ -1,0 +1,14 @@
+[project]
+name = "minds"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "arxiv>=2.2.0",
+    "beautifulsoup4>=4.13.4",
+    "dotenv>=0.9.9",
+    "flask>=3.1.1",
+    "mindsdb-sdk>=3.4.3",
+    "pandas>=2.3.0"
+]

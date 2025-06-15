@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Herbal Remedy Advisor</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body class="app">
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">Herbal Remedy Advisor</h1>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/" class="nav-link active">Search</a></li>
+                <li class="nav-item"><a href="/browse" class="nav-link">Browse All</a></li>
+                <li class="nav-item"><a href="/add" class="nav-link">Add Remedy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>Find Herbal Remedies</h1>
+                <p>Search for natural solutions to common ailments</p>
+            </div>
+            
+            <div class="main-content">
+                <form method="POST" action="/" class="search-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" name="query" class="form-input" placeholder="Search for remedies..." required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Symptom</label>
+                            <select name="symptom" class="form-select">
+                                <option value="">All Symptoms</option>
+                                <option value="Headache">Headache</option>
+                                <option value="Insomnia">Insomnia</option>
+                                <option value="Nausea">Nausea</option>
+                                <option value="Cold">Cold</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Safety Level</label>
+                            <select name="safety" class="form-select">
+                                    <option value="">All Safety Levels</option>
+                                    <option value="Safe for all ages">Safe for all ages</option>
+                                    <option value="Safe in small doses">Safe in small doses</option>
+                                    <option value="Avoid during pregnancy">Avoid during pregnancy</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">Search</button>
+                    </div>
+                </form>
+
+                {% if results and results|length > 0 %}
+                    <div class="results-section">
+                        <h2 class="section-title">Search Results</h2>
+                        <div class="results-grid">
+                            {% for remedy in results %}
+                                <div class="result-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">{{ remedy.symptom|title if remedy.symptom else 'General' }}</h3>
+                                        <span class="card-category">{{ remedy.safety|replace('_', ' ')|title }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-description">{{ remedy.content }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="no-results">No remedies found. Try another search.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

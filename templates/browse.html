@@ -1,50 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>All Herbal Remedies - Herbal Remedy Advisor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-</head>
-<body class="app">
-    <nav class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-title">Herbal Remedy Advisor</h1>
-            <ul class="nav-list">
-                <li class="nav-item"><a href="/" class="nav-link">Search</a></li>
-                <li class="nav-item"><a href="/browse" class="nav-link active">Browse All</a></li>
-                <li class="nav-item"><a href="/add" class="nav-link">Add Remedy</a></li>
-            </ul>
-        </div>
-    </nav>
+{% extends "base.html" %}
 
-    <div class="page-container">
-        <div class="content-wrapper">
-            <div class="page-header">
-                <h1>All Herbal Remedies</h1>
-                <p>Browse our complete collection of herbal remedies</p>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">All Herbal Remedies</h5>
             </div>
-            
-            <div class="main-content">
-                {% if results is not none and not results.empty %}
-                    <div class="results-section">
-                        <div class="browse-grid">
-                            {% for remedy in results %}
-                                <div class="remedy-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">{{ remedy.symptom|title if remedy.symptom else 'General' }}</h3>
-<span class="card-category">{{ remedy.safety|replace('_', ' ')|title }}</span>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-description">{{ remedy.content }}</p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+            <div class="card-body">
+                {% if results %}
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Symptom</th>
+                            <th>Safety</th>
+                            <th>Remedy Description</th>
+                            <th>Source</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for remedy in results %}
+                        <tr>
+                            <td>{{ remedy.symptom }}</td>
+                            <td>{{ remedy.safety }}</td>
+                            <td>{{ remedy.content }}</td>
+                            <td>{{ remedy.source }}</td>
+                            <td>{{ remedy.timestamp }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 {% else %}
-                    <p class="no-results">No remedies in the database yet.</p>
+                <div class="alert alert-info">No remedies found.</div>
                 {% endif %}
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %} 

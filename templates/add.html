@@ -1,56 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Remedy - Herbal Remedy Advisor</title>
-    <link rel="stylesheet" href="/static/styles/style.css">
-</head>
-<body class="app">
-    <nav class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-title">Herbal Remedy Advisor</h1>
-            <ul class="nav-list">
-                <li class="nav-item"><a href="/" class="nav-link">Search</a></li>
-                <li class="nav-item"><a href="/browse" class="nav-link">Browse All</a></li>
-                <li class="nav-item"><a href="/add" class="nav-link active">Add Remedy</a></li>
-            </ul>
-        </div>
-    </nav>
+{% extends "base.html" %}
 
-    <div class="page-container">
-        <div class="content-wrapper">
-            <div class="page-header">
-                <h1>Add New Herbal Remedy</h1>
-                <p>Contribute to our growing database of natural remedies</p>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Remedy</h5>
             </div>
-            
-            <div class="main-content">
-                <form method="POST" action="/add" class="remedy-form">
-                    <div class="form-group">
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add') }}">
+                    <div class="mb-3">
                         <label for="content" class="form-label">Remedy Description</label>
-                        <textarea name="content" id="content" class="form-textarea" placeholder="Enter detailed remedy description..." required></textarea>
+                        <textarea class="form-control" id="content" name="content" rows="4" required
+                            placeholder="Enter detailed description of the remedy, including preparation method, dosage, and any warnings..."></textarea>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="symptom" class="form-label">Symptom (optional)</label>
-                        <input type="text" name="symptom" id="symptom" class="form-input" placeholder="e.g., headache, insomnia, nausea">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="safety" class="form-label">Safety Level</label>
-                        <select name="safety" id="safety" class="form-select" required>
-                            <option value="generally_safe">Generally Safe</option>
-                            <option value="safe in small doses">Pregnancy Safe</option>
-                            <option value="avoid during pregnancy">Pregnancy Unsafe</option>
+                    <div class="mb-3">
+                        <label for="symptom" class="form-label">Target Symptom</label>
+                        <select class="form-select" id="symptom" name="symptom" required>
+                            <option value="">Select a symptom</option>
+                            <option value="headache">Headache</option>
+                            <option value="insomnia">Insomnia</option>
+                            <option value="anxiety">Anxiety</option>
+                            <option value="digestion">Digestion</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Add Remedy</button>
-                        <a href="/" class="btn btn-secondary">Cancel</a>
+                    <div class="mb-3">
+                        <label for="safety" class="form-label">Safety Level</label>
+                        <select class="form-select" id="safety" name="safety" required>
+                            <option value="">Select safety level</option>
+                            <option value="pregnancy_safe">Safe During Pregnancy</option>
+                            <option value="pregnancy_unsafe">Not Safe During Pregnancy</option>
+                            <option value="consult_doctor">Consult Doctor Before Use</option>
+                        </select>
                     </div>
+                    
+                    <div class="mb-3">
+                        <label for="source" class="form-label">Source (Optional)</label>
+                        <input type="text" class="form-control" id="source" name="source" 
+                            placeholder="e.g., Traditional Medicine, Ayurveda, etc.">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Add Remedy</button>
                 </form>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %} 

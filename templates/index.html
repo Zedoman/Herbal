@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1 class="card-title mb-4">🌿 Welcome to Herbal Remedy Advisor</h1>
+                <p class="lead">Find natural treatments for your symptoms with our AI-powered herbal remedy database.</p>
+                
+                <div class="row mt-4 g-4">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="feature-card text-center h-100">
+                            <div class="feature-icon">🔍</div>
+                            <div class="feature-title">Search Remedies</div>
+                            <div class="card-text flex-grow-1">
+                                Discover the power of nature! Instantly find herbal solutions for your symptoms, complete with safety info and preparation tips.<br>
+                                <b>Type your symptom and let HerbAI do the rest!</b>
+                            </div>
+                            <a href="/search" class="btn feature-btn">Search Now</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="feature-card text-center h-100">
+                            <div class="feature-icon">➕</div>
+                            <div class="feature-title">Add Remedy</div>
+                            <div class="card-text flex-grow-1">
+                                Know a secret herbal trick? Share your favorite natural remedies with the world and help others heal the herbal way!<br>
+                                <b>Your wisdom could be someone's relief.</b>
+                            </div>
+                            <a href="/add" class="btn feature-btn">Add Remedy</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="feature-card text-center h-100">
+                            <div class="feature-icon">🌱</div>
+                            <div class="feature-title">Browse All Remedies</div>
+                            <div class="card-text flex-grow-1">
+                                Explore our growing library of herbal wisdom. See what others have shared and get inspired to try something new!<br>
+                                <b>Nature's medicine chest is just a click away.</b>
+                            </div>
+                            <a href="/browse" class="btn feature-btn">Browse Remedies</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="feature-card text-center h-100">
+                            <div class="feature-icon">🤖</div>
+                            <div class="feature-title">Ask HerbAI</div>
+                            <div class="card-text flex-grow-1">
+                                Got a question? Chat with our AI herbalist for instant, friendly advice on natural remedies, safety, and more!<br>
+                                <b>Ask anything—HerbAI is here to help.</b>
+                            </div>
+                            <a href="/agent_status" class="btn feature-btn">Ask the Agent</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h4>Features:</h4>
+                    <ul class="list-unstyled">
+                        <li>✅ Comprehensive herbal remedy database</li>
+                        <li>✅ Safety information and contraindications</li>
+                        <li>✅ Pregnancy safety warnings</li>
+                        <li>✅ Drug interaction alerts</li>
+                        <li>✅ Traditional medicine insights</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .feature-card {
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(60, 72, 88, 0.10);
+        transition: transform 0.18s, box-shadow 0.18s;
+        background: linear-gradient(135deg, #f8fafc 80%, #e6f4ea 100%);
+        min-height: 340px;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .feature-card:hover {
+        transform: translateY(-8px) scale(1.04);
+        box-shadow: 0 12px 32px rgba(60, 72, 88, 0.18);
+        background: linear-gradient(135deg, #e6f4ea 80%, #f8fafc 100%);
+    }
+    .feature-icon {
+        font-size: 2.7rem;
+        margin-bottom: 0.7rem;
+        color: #388e3c;
+        filter: drop-shadow(0 2px 4px #b2dfdb);
+    }
+    .feature-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: #256029;
+    }
+    .feature-btn {
+        background: #388e3c;
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 8px;
+        margin-top: 1.2rem;
+        transition: background 0.15s;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(56, 142, 60, 0.08);
+    }
+    .feature-btn:hover {
+        background: #256029;
+        color: #fff;
+    }
+    .card-text b {
+        color: #256029;
+    }
+    @media (max-width: 991px) {
+        .feature-card { min-height: 360px; }
+    }
+    @media (max-width: 767px) {
+        .feature-card { min-height: 0; }
+    }
+</style>
+{% endblock %} 

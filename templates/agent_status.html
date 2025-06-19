@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <h3>Ask the Herbal Remedy Agent</h3>
+                <form method="POST" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="question" placeholder="Ask a question..." value="{{ question }}" required>
+                        <button type="submit" class="btn btn-primary">Ask</button>
+                    </div>
+                </form>
+                {% if answer is not none %}
+                    <div class="alert alert-info mt-4" style="white-space: pre-line;">{{ answer }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

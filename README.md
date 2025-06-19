@@ -1,4 +1,4 @@
-# 🌿 Herbal Remedy AI Knowledge Base 🧠✨
+# 🌿 Herbal Remedy Advisor
 
 > "Because your grandma’s tea deserves LLM-level respect!"
 > 🔮 Powered by MindsDB, Ollama, and Flask. Built with love & curiosity.
@@ -11,22 +11,25 @@ This project is an AI-powered **Herbal Remedy Search Engine**. Think of it as th
 
 It supports:
 
-* ⚙️ Ollama integration via MindsDB ML Engine
-* 🧠 AI-augmented Knowledge Base querying
-* 🗂️ Inserting and browsing herbal remedies
-* 🔍 Semantic search for herbal treatments based on symptoms & safety
-* ⚖️ Full Flask backend, templated frontend
+- 🔍 **Semantic Search**: Find herbal remedies using natural language queries, powered by a knowledge base with embeddings and relevance filtering.
+- ➕ **Add Remedy**: Contribute your own herbal wisdom to the community.
+- 🌱 **Browse All Remedies**: Explore the full database of natural treatments.
+- 🤖 **Ask HerbAI**: Chat with an AI agent for instant, friendly advice on remedies, safety, and more.
+- ⚡ **Fast Search**: Uses `CREATE INDEX ON KNOWLEDGE_BASE` for optimized semantic search performance.
+- 🛡️ **Safety Info**: Every remedy includes safety, pregnancy, and interaction warnings.
+- ✨ **Modern UI**: Beautiful, responsive cards and layout.
 
 ---
 
-## 🚀 Features
+## 🧠 Powered By
 
-* 💬 Semantic search using `semantic_search` on content
-* 🌱 Knowledge Base setup with `ollama_engine` in MindsDB
-* 📆 Sample remedies like Ginger Tea for Headaches 🍵
-* 📄 Dynamic metadata: symptoms, safety, sources, timestamps
-* 🧪 Easily extendable with efficacy ratings
-* 💻 Fully server-rendered with `browse`, `add`, and `search` pages
+| Stack Component | Tech Used                                                  |
+| --------------- | ---------------------------------------------------------- |
+| **LLM**         | gemini-2.0-flash (for agent chat)                         |
+| **Embeddings**  | nomic-embed-text (Ollama)                                 |
+| **Vector DB**   | Chroma/PGVector (via MindsDB)                             |
+| **Framework**   | [MindsDB](https://mindsdb.com/)                           |
+| **Web**         | Flask, Bootstrap 5                                        |
 
 ---
 
@@ -104,15 +107,21 @@ When the app runs for the first time, it:
 ### 🏠 Homepage
 
 Go to `http://localhost:5001`
-Use the form to search herbal remedies using natural language.
 
 ### 🔍 `/browse`
+Use the form to search herbal remedies using natural language.
+
+### 🌱 `/browse`
 
 Shows top 100 records from the knowledge base in a simple interface.
 
 ### ➕ `/add`
 
 Insert your favorite remedy for **cold**, **cough**, or even **existential dread**.
+
+### 🤖 `/agent`
+
+Ask your herbal agent anything.
 
 ---
 
@@ -124,7 +133,13 @@ herbal-remedy-kb-ai/
 ├── templates/
 │   ├── search.html
 │   ├── browse.html
+│   ├── agent_status.html
+│   ├── index.html
+│   ├── base.html
 │   └── add.html
+├── src/core
+│   ├── mindsdb.py
+│   ├── queries.py
 │
 ├── app.py             # Main Flask server with routes
 ├── pyproject.toml     # Project config for uv / poetry
@@ -133,12 +148,14 @@ herbal-remedy-kb-ai/
 
 ---
 
-## 📋 Environment Variables (Optional)
+## 📋 Environment Variables
 
 Set this for secure Flask sessions:
 
 ```bash
-export FLASK_SECRET_KEY="supersecretkey"
+OLLAMA_SERVE_URL=http://host.docker.internal:11434
+OLLAMA_MODEL_NAME=deepseek-r1:1.5b
+GOOGLE_API_KEY=
 ```
 
 ---

@@ -138,7 +138,6 @@ herbal-remedy-kb-ai/
 │   ├── base.html
 │   └── add.html
 ├── src/core
-│   ├── mindsdb.py
 │   ├── queries.py
 │
 ├── app.py             # Main Flask server with routes

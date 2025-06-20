@@ -26,8 +26,8 @@ It supports:
 | Stack Component | Tech Used                                                  |
 | --------------- | ---------------------------------------------------------- |
 | **LLM**         | gemini-2.0-flash (for agent chat)                         |
-| **Embeddings**  | nomic-embed-text (Ollama)                                 |
-| **Vector DB**   | Chroma/PGVector (via MindsDB)                             |
+| **Embeddings**  | deepseek-r1:1.5b (Ollama)                                 |
+| **DB**          | MindsDB                                                   |
 | **Framework**   | [MindsDB](https://mindsdb.com/)                           |
 | **Web**         | Flask, Bootstrap 5                                        |
 

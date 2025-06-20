@@ -123,6 +123,9 @@ Insert your favorite remedy for **cold**, **cough**, or even **existential dread
 
 Ask your herbal agent anything.
 
+### 🤖 `/create_job`
+To create job
+
 ---
 
 ## 🗂️ Project Structure

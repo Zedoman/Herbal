@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Create Scheduled Job</h2>
+  <form method="POST" action="{{ url_for('create_job') }}">
+    <div class="mb-3">
+      <label for="name" class="form-label">Job Name</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="schedule_str" class="form-label">Schedule (optional cron format)</label>
+        <input type="text" class="form-control" id="schedule_str" name="schedule_str" placeholder="* * * * *">
+        <small class="text-muted">Example: 0 8 * * * for daily at 8am</small>
+      </div>
+    <div class="mb-3">
+      <label for="query" class="form-label">SQL Query</label>
+      <textarea class="form-control" id="query" name="query" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Job</button>
+  </form>
+</div>
+{% endblock %}

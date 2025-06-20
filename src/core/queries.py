@@ -72,3 +72,15 @@ SELECT answer
 FROM herbal_rem.remedy_agent 
 WHERE question = '{question}';
 """
+
+CREATE_JOB_PAYLOAD = {
+    "name": "daily_herbal_summary",
+    "query": """
+        SELECT answer
+        FROM herbal_rem.remedy_agent
+        WHERE question = 'Give me a daily summary of new herbal remedies added.';
+    """,
+    # Optional: Only run if there are new remedies today
+    # "if_query": "SELECT COUNT(*) FROM herbal_rem.remedy_kb WHERE timestamp >= CURDATE();",
+    "schedule_str": "0 8 * * *"  # Every day at 8am (cron format)
+}

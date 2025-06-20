@@ -1,12 +1,14 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 from mindsdb_sdk import connect
-from datetime import datetime
+
+from datetime import datetime, timedelta
 import json
 from json import dumps
 from dotenv import load_dotenv
 import os
 from src.core.queries import embedding_model, PROMPT_TEMPLATE, CREATE_AGENT_QUERY, SELECT_ANSWER_QUERY
 import nest_asyncio
+import requests
 
 # Apply nest_asyncio to allow nested event loops
 nest_asyncio.apply()
@@ -25,6 +27,8 @@ KB_NAME = f"{PROJECT_NAME}.remedy_kb"
 # Initialize MindsDB connection
 server = connect(MINDSDB_SERVER)
 files_db = server.get_database("files")
+
+MINDSDB_API_URL = "http://localhost:47334/api"  # Adjust if your MindsDB runs elsewhere
 
 def run_query(query: str):
     try:
@@ -273,6 +277,55 @@ def agent_exists():
     except Exception as e:
         # print(f"Agent check error: {e}")
         return False
+
+def create_mindsdb_job(project_name, payload):
+    url = f"{MINDSDB_API_URL}/projects/{project_name}/jobs"
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    try:
+        return response.status_code, response.json()
+    except Exception:
+        return response.status_code, response.text
+
+@app.route('/create_job', methods=['GET', 'POST'])
+def create_job():
+    if request.method == 'POST':
+        job_name = request.form['name']
+        schedule_str = request.form.get('schedule_str', '').strip()
+        query = request.form['query']
+
+        # Get current time and add 1 year for end_at
+        now = datetime.now()
+        start_at = now.strftime('%Y-%m-%d %H:%M:%S')
+        end_at = (now + timedelta(days=365)).strftime('%Y-%m-%d %H:%M:%S')
+
+        job_payload = {
+            "job": {
+                "name": job_name,
+                "query": query,
+                "start_at": start_at,
+                "end_at": end_at  # Added required end_at parameter
+            }
+        }
+
+        if schedule_str:
+            job_payload["job"]["schedule_str"] = schedule_str
+
+        try:
+            status_code, response_json = create_mindsdb_job(PROJECT_NAME, job_payload)
+            if status_code in (200, 201):
+                flash('Job created successfully!', 'success')
+            else:
+                flash(f'Failed to create job: {response_json}', 'danger')
+        except Exception as e:
+            flash(f'Error: {str(e)}', 'danger')
+
+        return redirect(url_for('create_job'))
+
+    return render_template('create_job.html')
 
 if __name__ == '__main__':
     if init_ai_environment():

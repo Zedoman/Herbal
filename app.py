@@ -120,7 +120,7 @@ def search():
             sql = f"""
                 SELECT *
                 FROM {KB_NAME}
-                WHERE semantic_search('{safe_query}', herbal_rem.remedy_kb.content)
+                WHERE semantic_search('{safe_query}', remedy_kb.content)
             """
 
             if symptom and symptom != 'All':

@@ -327,6 +327,26 @@ def create_job():
 
     return render_template('create_job.html')
 
+@app.route('/evaluate_kb', methods=['GET', 'POST'])
+def evaluate_kb():
+    evaluation_results = None
+    error = None
+    if request.method == 'POST':
+        try:
+            # You can customize the test table and version as needed
+            eval_query = f"""
+            EVALUATE KNOWLEDGE_BASE {KB_NAME}
+            USING test_table = {KB_NAME}, version = 'llm_relevancy';
+            """
+            df = run_query(eval_query)
+            if df is not None and not df.empty:
+                evaluation_results = df.to_dict('records')
+            else:
+                error = 'No evaluation results returned.'
+        except Exception as e:
+            error = f"Evaluation error: {str(e)}"
+    return render_template('evaluate_kb.html', evaluation_results=evaluation_results, error=error)
+
 if __name__ == '__main__':
     if init_ai_environment():
         print("✅ System initialized successfully")

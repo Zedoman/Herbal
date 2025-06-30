@@ -164,6 +164,7 @@ Set this for secure Flask sessions:
 OLLAMA_SERVE_URL=http://host.docker.internal:11434
 OLLAMA_MODEL_NAME=deepseek-r1:1.5b
 GOOGLE_API_KEY=
+OPENAI_API_KEY=
 ```
 
 ---
